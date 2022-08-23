@@ -91,7 +91,10 @@ class Game:
                 game.bankMoney()
                 return game.response(1)
             player.lives -= game.a_diff
-            return game.response(2)
+            if player.lives >= -1:
+                return game.response(2)
+            else:
+                pass
 
     def addMoney(self):
         setattr(game, "gained", 0)
@@ -125,7 +128,7 @@ class Game:
         return self.difficulty
 
     def endGame(self):
-            if player.lives >= -1 and game.user_answer.lower() != "bank":
+            if game.user_answer.lower() != "bank":
                 self.response(5)
                 return exit()
             else:
@@ -191,10 +194,11 @@ The Correct Answer was {game.q_list[1]}.
 You played {game.user_answer} so were {abs(game.a_diff)} away""")
         elif num == 5:
             print(f"""
-**** OUT OF LIVES!!! :( ****
-
-The Correct Answer was {game.q_list[1]}.
-You played {game.user_answer} so were {abs(game.a_diff)} away""")
+====================================================================================================
+                                        **** GAME OVER ****
+====================================================================================================
+                                     You ran out of lives :(
+""")
         elif num == 6 and game.difficulty > 0:
             input("Press enter to continue...")
             os.system('cls' if os.name == 'nt' else 'clear')
